@@ -24,9 +24,10 @@ const float thickness = 1.7f;
 const int TILE_SIZE = 32;
 const int MAP_SIZE_W = 20;
 const int MAP_SIZE_H = 20;
-const int TILE_MAP_SIZE_W = 6;
-const int TILE_MAP_SIZE_H = 3;
-const int BTN_SIZE = 64;
+const int TILE_MAP_SIZE_W = 8;
+const int TILE_MAP_SIZE_H = 41;
+const int BTN_SIZE = 32;
+const int TEXTURE_SIZE = 32;
 
 // ####################################################
 // ------------- Menus related consts -----------------
@@ -35,6 +36,6 @@ const std::string tiles_filename = "resources/tiles.png";
 const std::string act_btn_txt_filename = "resources/action_menu.png";
 const std::string shape_btn_txt_filename = "resources/shape_menu.png";
 const std::string color_btn_txt_filename = "resources/color_menu.png";
-const int TEXTURE_SIZE = 64;
+
 
 // ####################################################

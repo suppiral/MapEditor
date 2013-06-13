@@ -162,7 +162,7 @@ void Controller::createMenus()
 void Controller::createTileMenu() 
 { 
 	// creates a menu at 0,0 with <SIDES_MENU_WIDTH> buttons in a line and <SIDES_MENU_HEIGHT> buttons in a column with action buttons texture
-	Menu* action_menu = new Menu(Vertex(MAP_SIZE_W*TILE_SIZE,0), Vertex(3, TILE_MAP_SIZE_H*TILE_MAP_SIZE_W/3), tiles_filename);
+	Menu* action_menu = new Menu(Vertex(MAP_SIZE_W*TILE_SIZE,0), Vertex(8, TILE_MAP_SIZE_H*TILE_MAP_SIZE_W/3), tiles_filename);
 	
 	// add buttons: pic_mark and command
 

@@ -28,6 +28,7 @@ Controller::Controller() : _tile(0), _mouse_pos(BAD,BAD)
 	// texture
 	_texture = new sf::Texture;
 	loadTexture(*_texture, tiles_filename, TILE_MAP_SIZE_W, TILE_MAP_SIZE_H);
+	LoadFont(_font, "consola.ttf");
 }
 // destructor
 Controller::~Controller()
@@ -79,7 +80,7 @@ void Controller::display()
 		_menus[i]->display(_window);
 	
 	// draw information about the shapes
-//	display_info();
+	display_info();
 		// draw shapes
 
 
@@ -87,7 +88,7 @@ void Controller::display()
 	_window.display();
 }
 
-/*
+
 
 // draw information about the shapes
 void Controller::display_info()
@@ -97,16 +98,17 @@ void Controller::display_info()
 	if (_mouse_pos.x > BAD)
 	{
 		std::stringstream msstr;
-		msstr << "(" << _mouse_pos.x << "," << _mouse_pos.y << ")";
-		sf::Text mouse_pos(msstr.str(), sf::Font::getDefaultFont(), FONT_SIZE);
-		mouse_pos.setColor(sf::Color::Black);
-		mouse_pos.setPosition(MOUSE_POS_POS_X, MOUSE_POS_POS_Y);
+		msstr << _tile << std::endl << "(" << _mouse_pos.x << "," << _mouse_pos.y << ")" << std::endl <<
+			(_mouse_pos.x / TILE_SIZE) + (_mouse_pos.y / TILE_SIZE) * MAP_SIZE_W;
+		sf::Text mouse_pos(msstr.str(), _font);
+		mouse_pos.setColor(sf::Color::Blue);
+		mouse_pos.setPosition(WINDOW_WIDTH - 200, WINDOW_HEIGHT - 130);
 
 		// draw
 		_window.draw(mouse_pos);
 	}
 }
-*/
+
 
 // handle events
 void Controller::handleEvents(const sf::Event& event)
@@ -130,7 +132,7 @@ void Controller::handleEvents(const sf::Event& event)
 	case sf::Event::MouseMoved: // moving mouse. save mouse position and display coordinates if on canvas
 		if (_canvas.is_in_canvas(event.mouseMove.x, event.mouseMove.y))
 		{
-			_mouse_pos.x = event.mouseMove.x - 128;
+			_mouse_pos.x = event.mouseMove.x;
 			_mouse_pos.y = event.mouseMove.y;
 		}
 		else // not on canvas
@@ -162,7 +164,7 @@ void Controller::createMenus()
 void Controller::createTileMenu() 
 { 
 	// creates a menu at 0,0 with <SIDES_MENU_WIDTH> buttons in a line and <SIDES_MENU_HEIGHT> buttons in a column with action buttons texture
-	Menu* action_menu = new Menu(Vertex(MAP_SIZE_W*TILE_SIZE,0), Vertex(8, TILE_MAP_SIZE_H*TILE_MAP_SIZE_W/3), tiles_filename);
+	Menu* action_menu = new Menu(Vertex(MAP_SIZE_W*TILE_SIZE,0), Vertex(TILE_MAP_SIZE_W, TILE_MAP_SIZE_H*TILE_MAP_SIZE_W/3), tiles_filename);
 	
 	// add buttons: pic_mark and command
 
@@ -177,7 +179,7 @@ void Controller::createTileMenu()
 void Controller::createActionMenu() 
 { 
 	// creates a menu at 0,0 with <SIDES_MENU_WIDTH> buttons in a line and <SIDES_MENU_HEIGHT> buttons in a column with action buttons texture
-	Menu* action_menu = new Menu(Vertex(0,MAP_SIZE_W*TILE_SIZE), Vertex(5, 1), act_btn_txt_filename);
+	Menu* action_menu = new Menu(Vertex(0,MAP_SIZE_H*TILE_SIZE), Vertex(5, 1), act_btn_txt_filename);
 	
 	// add buttons: pic_mark and command
 	action_menu->add(4, new CnvsVoidCmd(_canvas, &Canvas::clearShapes));

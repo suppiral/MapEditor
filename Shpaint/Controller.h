@@ -11,8 +11,8 @@
 #include "Tile.h"
 #include <vector>
 
-const int WINDOW_WIDTH = 1032;
-const int WINDOW_HEIGHT = 765;
+const int WINDOW_WIDTH = 1802;
+const int WINDOW_HEIGHT = 1005;
 
 class Controller
 {
@@ -42,6 +42,7 @@ private:
 
 	void setWindow();
 
+	sf::Font _font;
 
 	int _tile;
 
@@ -50,4 +51,6 @@ private:
 	void setTile(int num) { _tile = num; }
 	void fillTile() { _canvas.fill(_texture, _tile); }
 	void loadMap() { _canvas.loadMap(_texture); }
+
+	void Controller::display_info();
 };
